@@ -1,4 +1,4 @@
-import { Movie } from "../Models/Movie"
+import { Movie } from "../models/Movie"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formatMovie = (movie: any) : Movie => ({
