@@ -1,0 +1,12 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "node": "current"
+      },
+      "modules": true // Or "auto"
+    }],
+    ["@babel/preset-react", { "runtime": "automatic" }],
+    "@babel/preset-typescript"
+  ]
+}
