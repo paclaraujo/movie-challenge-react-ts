@@ -26,13 +26,19 @@ describe("getMovies", () => {
 
   it("should return a formated response", async () => {
     global.fetch = jest.fn().mockResolvedValue({
-      json: () => Promise.resolve({ results: APIMovies }),
+      json: () => Promise.resolve({ page: 1, total_pages: 10, results: APIMovies }),
     });
 
-    const result = await getMovies();
+    const result = await getMovies({filters: {page: 1}});
 
-    expect(result).toStrictEqual([
-      {
+    expect(result).toStrictEqual({
+      metaData: {
+        pagination: {
+          currentPage: 1,
+          totalPages: 10
+        },
+      },
+      movies: [{
         image: `https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg`,
         title: "Poor Things",
         releaseDate: new Date("2023-12-07"),
@@ -40,11 +46,11 @@ describe("getMovies", () => {
         originalTitle: "Poor Things",
         overview: "Brought back to life by an unorthodox scientist.",
         voteAverage: 7.901,
-      },
-    ]);
+      }],
+  });
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith(
-      "https://api.themoviedb.org/3/discover/movie",
+      "https://api.themoviedb.org/3/discover/movie?page=1",
       {
         method: "GET",
         headers: {
@@ -58,7 +64,7 @@ describe("getMovies", () => {
   it('should return an error if fetch fails', async () => {
     global.fetch = jest.fn().mockRejectedValue('API is down');
 
-    const result = await getMovies();
+    const result = await getMovies({filters: {page: 1}});
     expect(result).toBe('API is down');
   });
 });
