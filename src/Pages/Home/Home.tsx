@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getMovies } from "../../services/APIService";
 import MovieList from "../../Components/MovieList/MovieList";
 import { Movie } from "../../models/Movie";
+import Pagination from "../../Components/Pagination/Pagination";
 import "./Home.css"
 
 const Home = () => {
@@ -9,17 +10,23 @@ const Home = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(10);
+
+
   useEffect(() => {
     setIsLoading(true);
-    getMovies({filters: {page: 1}})
+    getMovies({filters: {page: currentPage}})
       .then((response) => {
         setMovies(response.movies)
         setIsLoading(false)
+        setCurrentPage(response.metaData.pagination.currentPage)
+        setTotalPages(response.metaData.pagination.totalPages)
       }).catch((err) => {
         setError(err)
         setIsLoading(false)
       })
-  }, [])
+  }, [currentPage])
 
 
   return <>
@@ -27,7 +34,11 @@ const Home = () => {
       <p>{error}</p> : 
       isLoading ? 
         <div className="loader__container"><span className="loader" /></div> : 
-        <MovieList movies={movies}/>}
+        <>
+          <MovieList movies={movies}/>
+          <Pagination currentPage={currentPage} totalPages={totalPages} onSelectPage={(pageNumber) => {setCurrentPage(pageNumber)}} />
+        </>
+      }
   </>
   
 };
