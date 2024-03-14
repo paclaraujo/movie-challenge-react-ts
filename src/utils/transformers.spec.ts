@@ -1,4 +1,4 @@
-import { formatMovie } from "./transformers";
+import { formatMovie, formatGenresToMap } from "./transformers";
 
 describe("formatMovie", () => {
   it("should format movie API infos according to Movie type", () => {
@@ -23,7 +23,7 @@ describe("formatMovie", () => {
       "vote_count": 2183
     }
 
-    const formatedMovie = formatMovie(APIMovie);
+    const formatedMovie = formatMovie(APIMovie, formatGenresToMap([{id: 878, name: 'Action'}, {id: 10749, name: 'Drama'}, {id: 35, name: 'Comedy'}]));
     expect(formatedMovie).toStrictEqual({
       image: `https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg`,
       title: "Poor Things",
@@ -35,3 +35,5 @@ describe("formatMovie", () => {
     })
   })
 })
+
+//TODO: testes movieGenresMap

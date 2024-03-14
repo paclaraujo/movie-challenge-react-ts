@@ -6,4 +6,5 @@ export type Movie = {
   originalTitle: string;
   overview: string;
   voteAverage: number;
+  genres: string[];
 }

@@ -10,7 +10,8 @@ const movies = [
     originalLanguage: "en",
     originalTitle: "Movie 1",
     overview:  "Description Movie 1",
-    voteAverage: 7.901, 
+    voteAverage: 7.901,
+    genres: ['Action']
   },
   {
     image: `https://example.com/movie2.jpg`,
@@ -19,7 +20,8 @@ const movies = [
     originalLanguage: "en",
     originalTitle: "Movie 2",
     overview:  "Description Movie 2",
-    voteAverage: 7.901, 
+    voteAverage: 7.901,
+    genres: ['Action']
   },
 ]
 
