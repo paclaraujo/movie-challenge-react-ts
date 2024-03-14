@@ -33,7 +33,7 @@ describe("getMovies", () => {
 
     expect(result).toStrictEqual([
       {
-        image: `https://media.themoviedb.org/t/p/w220_and_h330_face/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg`,
+        image: `https://image.tmdb.org/t/p/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg`,
         title: "Poor Things",
         releaseDate: new Date("2023-12-07"),
         originalLanguage: "en",
