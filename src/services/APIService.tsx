@@ -1,7 +1,23 @@
 import { Movie } from "../models/Movie";
 import { formatMovie } from "../utils/transformers";
 
-export const getMovies = () : Promise<Movie[]> => {
+interface getMoviesParams {
+  filters : {
+    page: number;
+  }
+}
+
+interface getMoviesReturn {
+  metaData: { 
+    pagination: {
+      currentPage: number, 
+      totalPages: number
+    }
+  }, 
+  movies: Movie[]
+}
+
+export const getMovies = (params : getMoviesParams) : Promise<getMoviesReturn> => {
   const options = {
     method: 'GET',
     headers: {
@@ -10,8 +26,18 @@ export const getMovies = () : Promise<Movie[]> => {
     }
   };
 
-  return fetch('https://api.themoviedb.org/3/discover/movie', options)
+  return fetch(`https://api.themoviedb.org/3/discover/movie?page=${params.filters.page}`, options)
     .then(response => response.json())
-    .then(response => response.results.map(formatMovie))
+    .then(response => {
+      return {
+        metaData: {
+          pagination: {
+            currentPage: response.page,
+            totalPages: response.total_pages
+          }, 
+        },
+        movies: response.results.map(formatMovie)
+      }
+    })
     .catch(err => err);
 }
