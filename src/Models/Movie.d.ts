@@ -5,5 +5,5 @@ export type Movie = {
   originalLanguage: string;
   originalTitle: string;
   overview: string;
-  voteAverage: string;
+  voteAverage: number;
 }
