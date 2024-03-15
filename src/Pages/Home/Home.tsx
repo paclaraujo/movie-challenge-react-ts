@@ -11,9 +11,9 @@ const Home = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getMovies()
+    getMovies({filters: {page: 1}})
       .then((response) => {
-        setMovies(response)
+        setMovies(response.movies)
         setIsLoading(false)
       }).catch((err) => {
         setError(err)
