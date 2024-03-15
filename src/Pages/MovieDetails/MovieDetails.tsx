@@ -1,5 +1,3 @@
-import "react";
-
 const MovieDetails = () => {
   return <p>MovieDetails</p>
 };
