@@ -23,7 +23,11 @@ const Home = () => {
 
 
   return <>
-    {error ? <p>{error}</p> : isLoading ? <span className="loader"></span> : <MovieList movies={movies}/>}
+    {error ? 
+      <p>{error}</p> : 
+      isLoading ? 
+        <div className="loader__container"><span className="loader" /></div> : 
+        <MovieList movies={movies}/>}
   </>
   
 };
