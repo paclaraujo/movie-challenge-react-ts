@@ -4,6 +4,7 @@
   border-radius: 10px;
   color: #fff;
   border: 1px solid rgba(78, 83, 98, 0.20);
+  width: calc(15vw + 24px);
 }
 
 .card__image {
@@ -23,13 +24,17 @@
 
 .card__title {
   font-size: 12px;
+  max-width: 70%;
   font-weight: bold;
 }
 
 .card__average, .card__release {
+  display: flex;
+  align-items: center;
   border-radius: 10px;
   padding: 2px 5px;
   font-size: 8px;
+  height: 2vh;
 }
 
 .card__average {
@@ -42,4 +47,12 @@
   background-color: #7024B9;
 }
 
+@media (max-width: 768px){
+  .card {
+    width: calc(40vw + 24px);
+  }
 
+  .card__image {
+    width: 40vw;
+  }
+}
