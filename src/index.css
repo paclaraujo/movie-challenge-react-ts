@@ -18,3 +18,9 @@ body {
   min-height: 100vh;
   background-color: #060B1C;
 }
+
+#root {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
