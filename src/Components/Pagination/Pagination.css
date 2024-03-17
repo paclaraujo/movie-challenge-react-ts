@@ -1,0 +1,30 @@
+.pagination {
+  padding: 32px;
+  width: 50vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.paggination__button, .paggination__back, .paggination__next {
+  color: #fff;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  height: 4vh;
+  width: 4vh;
+  border-radius: 100%;
+}
+
+.paggination__back:disabled, .paggination__next:disabled {
+  color: #4E5362;
+  cursor: default;
+}
+
+.active {
+  background-color: rgb(112, 36,185, 0.50);
+}
+
+.paggination__button:hover, .paggination__button:active {
+  border: 1px solid #7024B9;
+}

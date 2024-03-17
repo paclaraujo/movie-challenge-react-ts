@@ -17,7 +17,7 @@ interface getMoviesReturn {
   movies: Movie[]
 }
 
-export const getMovies = (params : getMoviesParams) : Promise<getMoviesReturn> => {
+export const getMovies = ({filters: { page }} : getMoviesParams) : Promise<getMoviesReturn> => {
   const options = {
     method: 'GET',
     headers: {
@@ -26,7 +26,7 @@ export const getMovies = (params : getMoviesParams) : Promise<getMoviesReturn> =
     }
   };
 
-  return fetch(`https://api.themoviedb.org/3/discover/movie?page=${params.filters.page}`, options)
+  return fetch(`https://api.themoviedb.org/3/discover/movie?page=${page}`, options)
     .then(response => response.json())
     .then(response => {
       return {
