@@ -10,10 +10,10 @@ const MovieCard = ({ movie } : Props) => {
     <img className="card__image" src={movie.image} />
     <ul className="card__infos">
       <div className="card__infos__container">
-        <li className="card__title">{movie.title}</li>
+        <li className="card__title">{movie.title} | {movie.releaseDate.getFullYear()}</li>
         <li className="card__average">★ {movie.voteAverage.toFixed(1)}</li>
       </div>
-      <li className="card__release">{movie.releaseDate.getFullYear()}</li>
+      {movie.genres.map((genre, index  )=> <li key={genre+index} className="card__genres">{genre}</li>)}
     </ul>    
   </div>
 };

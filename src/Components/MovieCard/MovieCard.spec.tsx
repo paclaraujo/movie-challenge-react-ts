@@ -10,6 +10,7 @@ const movie = {
   originalTitle: "Movie 1",
   overview: "Description Movie 1",
   voteAverage: 7.901,
+  genres: ['Action']
 };
 
 describe("Movie Card component", () => {
