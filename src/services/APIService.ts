@@ -1,5 +1,6 @@
 import { Movie } from "../models/Movie";
 import { formatMovie } from "../utils/transformers";
+import { getMovieGenres } from "./movieService";
 
 interface getMoviesParams {
   filters : {
@@ -17,7 +18,7 @@ interface getMoviesReturn {
   movies: Movie[]
 }
 
-export const getMovies = ({filters: { page }} : getMoviesParams) : Promise<getMoviesReturn> => {
+export const getMovies = async ({filters: { page }} : getMoviesParams) : Promise<getMoviesReturn | string> => {
   const options = {
     method: 'GET',
     headers: {
@@ -26,18 +27,23 @@ export const getMovies = ({filters: { page }} : getMoviesParams) : Promise<getMo
     }
   };
 
-  return fetch(`https://api.themoviedb.org/3/discover/movie?page=${page}`, options)
-    .then(response => response.json())
-    .then(response => {
-      return {
-        metaData: {
-          pagination: {
-            currentPage: response.page,
-            totalPages: response.total_pages
-          }, 
-        },
-        movies: response.results.map(formatMovie)
-      }
-    })
-    .catch(err => err);
+  try {
+    const fetchResponse = await fetch(`https://api.themoviedb.org/3/discover/movie?page=${page}`, options);
+    const response = await fetchResponse.json();
+
+    const moviesGenres = await getMovieGenres();
+    
+    return {
+      metaData: {
+        pagination: {
+          currentPage: response.page,
+          totalPages: response.total_pages
+        }, 
+      },
+      movies: response.results.map((result: unknown) => formatMovie(result, moviesGenres))
+    }
+
+  } catch (error) {
+    return `Error: ${error}`;
+  }
 }

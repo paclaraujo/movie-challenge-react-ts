@@ -8,16 +8,15 @@ interface Props {
 }
 
 const Pagination = ({ currentPage, totalPages, onSelectPage } : Props) => {
-  const setPagination = () => {
+  const initialPages = () => {
     if(currentPage >=1 && currentPage <= 4){
       return getPagesArr(1)
     } else {
       return getPagesArr(currentPage - 3)
     }
   }
-
   const getPagesArr = (initialPage: number) => Array.from({length: 4}, (_, i) => i + initialPage)
-  const [pages, setPages] = useState(setPagination())
+  const [pages, setPages] = useState(initialPages())
 
 
   const pageBack = () => {

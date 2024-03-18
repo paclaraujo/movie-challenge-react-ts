@@ -18,10 +18,12 @@ const Home = () => {
     setIsLoading(true);
     getMovies({filters: {page: currentPage}})
       .then((response) => {
-        setMovies(response.movies)
+        if(typeof response !== 'string'){
+          setMovies(response.movies)
+          setCurrentPage(response.metaData.pagination.currentPage)
+          setTotalPages(response.metaData.pagination.totalPages)
+        }
         setIsLoading(false)
-        setCurrentPage(response.metaData.pagination.currentPage)
-        setTotalPages(response.metaData.pagination.totalPages)
       }).catch((err) => {
         setError(err)
         setIsLoading(false)

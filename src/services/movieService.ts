@@ -1,3 +1,5 @@
+import { formatGenresToMap } from "../utils/transformers";
+
 interface getMoviesGenresReturn {
   id: number;
   name: string;
@@ -14,6 +16,6 @@ export const getMovieGenres = () : Promise<getMoviesGenresReturn[]> => {
 
   return fetch(`https://api.themoviedb.org/3/genre/movie/list`, options)
     .then(response => response.json())
-    .then(response => response.genres)
+    .then(response => formatGenresToMap(response.genres))
     .catch(err => err);
 }

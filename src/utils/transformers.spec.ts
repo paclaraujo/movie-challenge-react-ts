@@ -32,6 +32,7 @@ describe("formatMovie", () => {
       originalTitle: "Poor Things",
       overview:  "Brought back to life by an unorthodox scientist.",
       voteAverage: 7.901,
+      genres: ["Action", "Drama", "Comedy"]
     })
   })
 })

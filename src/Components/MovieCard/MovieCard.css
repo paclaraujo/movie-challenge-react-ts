@@ -28,7 +28,7 @@
   font-weight: bold;
 }
 
-.card__average, .card__release {
+.card__average, .card__genres {
   display: flex;
   align-items: center;
   border-radius: 10px;
@@ -42,9 +42,10 @@
   background-color: rgb(254, 160, 0, 0.25);
 }
 
-.card__release {
+.card__genres {
   display: inline-flex;
   background-color: #7024B9;
+  margin-right: 4px;
 }
 
 @media (max-width: 768px){
