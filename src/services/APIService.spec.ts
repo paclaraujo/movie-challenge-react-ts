@@ -1,11 +1,22 @@
 import { getMovies } from "./APIService";
 
+const APIMoviesGenres = [
+  {
+    id: 1,
+    name: 'Action'
+  },
+  {
+    id: 2,
+    name: 'Drama'
+  },
+];
+
 const APIMovies = [
   {
+    id: 792307,
     adult: false,
     backdrop_path: "/bQS43HSLZzMjZkcHJz4fGc7fNdz.jpg",
-    genre_ids: [878, 10749, 35],
-    id: 792307,
+    genre_ids: [1, 2],
     original_language: "en",
     original_title: "Poor Things",
     overview: "Brought back to life by an unorthodox scientist.",
@@ -25,8 +36,10 @@ describe("getMovies", () => {
   });
 
   it("should return a formated response", async () => {
-    global.fetch = jest.fn().mockResolvedValue({
+    global.fetch = jest.fn().mockResolvedValueOnce({
       json: () => Promise.resolve({ page: 1, total_pages: 10, results: APIMovies }),
+    }).mockResolvedValueOnce({
+      json: () => Promise.resolve({ genres: APIMoviesGenres }),
     });
 
     const result = await getMovies({filters: {page: 1}});
@@ -39,16 +52,18 @@ describe("getMovies", () => {
         },
       },
       movies: [{
+        id: 792307,
         image: `https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg`,
         title: "Poor Things",
         releaseDate: new Date("2023-12-07"),
         originalLanguage: "en",
+        genres: ["Action", "Drama"],
         originalTitle: "Poor Things",
         overview: "Brought back to life by an unorthodox scientist.",
         voteAverage: 7.901,
       }],
   });
-    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledTimes(2);
     expect(fetch).toHaveBeenCalledWith(
       "https://api.themoviedb.org/3/discover/movie?page=1",
       {
@@ -65,6 +80,6 @@ describe("getMovies", () => {
     global.fetch = jest.fn().mockRejectedValue('API is down');
 
     const result = await getMovies({filters: {page: 1}});
-    expect(result).toBe('API is down');
+    expect(result).toBe('Error: API is down');
   });
 });

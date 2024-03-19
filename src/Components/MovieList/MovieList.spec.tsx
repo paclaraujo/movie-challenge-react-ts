@@ -1,9 +1,11 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react';
 import MovieList from './MovieList';
+import { MemoryRouter } from 'react-router-dom';
 
 const movies = [
   {
+    id: 1,
     image: `https://example.com/movie1.jpg`,
     title: "Movie 1",
     releaseDate: new Date("2023-12-07"),
@@ -14,6 +16,7 @@ const movies = [
     genres: ['Action']
   },
   {
+    id: 2,
     image: `https://example.com/movie2.jpg`,
     title: "Movie 2",
     releaseDate: new Date("2023-12-07"),
@@ -27,7 +30,11 @@ const movies = [
 
 describe("Movie Card component", () => {
   beforeEach(() => {
-    render(<MovieList movies={movies}/>);
+    render(
+      <MemoryRouter>
+        <MovieList movies={movies}/>
+      </MemoryRouter>
+    );
   })
 
   it('renders movies posters', () => {
@@ -40,12 +47,12 @@ describe("Movie Card component", () => {
   it('renders movies infos', () => {
     const liItems = screen.queryAllByRole('listitem');
 
-    expect(liItems[0]).toHaveTextContent(movies[0].title);
+    expect(liItems[0]).toHaveTextContent(`${movies[0].title} | 2023`);
     expect(liItems[1]).toHaveTextContent("★ 7.9");
-    expect(liItems[2]).toHaveTextContent("2023");
+    expect(liItems[2]).toHaveTextContent("Action");
 
-    expect(liItems[3]).toHaveTextContent(movies[1].title);
+    expect(liItems[3]).toHaveTextContent(`${movies[1].title} | 2023`);
     expect(liItems[4]).toHaveTextContent("★ 7.9");
-    expect(liItems[5]).toHaveTextContent("2023");
+    expect(liItems[5]).toHaveTextContent("Action");
   });
 })
