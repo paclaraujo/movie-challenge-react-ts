@@ -5,6 +5,7 @@ export const formatMovie = (movie: any, map: any) : Movie => {
   const genres = movie.genre_ids.map((id: number)=> map.get(id));
   
   return {
+    id: movie.id,
     image: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
     title: movie.title,
     releaseDate: new Date(movie.release_date),
@@ -17,8 +18,6 @@ export const formatMovie = (movie: any, map: any) : Movie => {
 }
 
 export const formatGenresToMap = (genres: Array<{id: number; name: string}>) => {
-  if(!genres.length) return [];
-
   const map = new Map();
   genres.forEach(genre => map.set(genre.id, genre.name))
   return map;
