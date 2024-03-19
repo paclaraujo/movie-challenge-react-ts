@@ -3,6 +3,7 @@ import { getMovies } from "../../services/APIService";
 import MovieList from "../../Components/MovieList/MovieList";
 import { Movie } from "../../models/Movie";
 import Pagination from "../../Components/Pagination/Pagination";
+import Spinner from "../../Components/Spinner/Spinner";
 import "./Home.css"
 
 const Home = () => {
@@ -35,7 +36,7 @@ const Home = () => {
     {error ? 
       <p>{error}</p> : 
       isLoading ? 
-        <div className="loader__container"><span className="loader" /></div> : 
+        <Spinner /> : 
         <>
           <MovieList movies={movies}/>
           <Pagination currentPage={currentPage} totalPages={totalPages} onSelectPage={(pageNumber) => {setCurrentPage(pageNumber)}} />
