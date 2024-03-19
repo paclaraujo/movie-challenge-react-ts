@@ -22,3 +22,7 @@ export const formatGenresToMap = (genres: Array<{id: number; name: string}>) => 
   genres.forEach(genre => map.set(genre.id, genre.name))
   return map;
 }
+
+export const formatGenresToOptions = (genres: Array<{id: number; name: string}>) : Array<{value: number; label: string}> => {
+  return genres.map(genre => ({value: genre.id, label: genre.name}))
+}
