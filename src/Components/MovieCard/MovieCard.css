@@ -5,6 +5,7 @@
   color: #fff;
   border: 1px solid rgba(78, 83, 98, 0.20);
   width: calc(15vw + 24px);
+  height: 55vh;
 }
 
 .card__image {
