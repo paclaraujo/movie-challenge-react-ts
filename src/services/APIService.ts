@@ -1,5 +1,5 @@
 import { Movie } from "../models/Movie";
-import { formatMovie } from "../utils/transformers";
+import { formatMovie, formatGenresToMap } from "../utils/transformers";
 import { getMovieGenres } from "./movieService";
 
 interface getMoviesParams {
@@ -40,7 +40,7 @@ export const getMovies = async ({filters: { page }} : getMoviesParams) : Promise
           totalPages: response.total_pages
         }, 
       },
-      movies: response.results.map((result: unknown) => formatMovie(result, moviesGenres))
+      movies: response.results.map((result: unknown) => formatMovie(result, formatGenresToMap(moviesGenres)))
     }
 
   } catch (error) {

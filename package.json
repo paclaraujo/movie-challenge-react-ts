@@ -9,7 +9,7 @@
     "lint": "eslint --fix . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "pretest": "npm run lint",
-    "test": "jest"
+    "test": "jest --coverage --detectOpenHandles"
   },
   "dependencies": {
     "react": "^18.2.0",
