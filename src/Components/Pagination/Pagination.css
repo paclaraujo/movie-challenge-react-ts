@@ -28,3 +28,9 @@
 .paggination__button:hover, .paggination__button:active {
   border: 1px solid #7024B9;
 }
+
+@media (max-width: 768px){
+  .pagination {
+    width: 100%;
+  }
+}

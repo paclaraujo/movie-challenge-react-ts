@@ -1,4 +1,4 @@
-import { formatMovie, formatGenresToMap } from "./transformers";
+import { formatMovie, formatGenresToMap, formatGenresToOptions } from "./transformers";
 
 describe("formatMovie", () => {
   it("should format movie API infos according to Movie type", () => {
@@ -38,4 +38,19 @@ describe("formatMovie", () => {
   })
 })
 
-//TODO: testes movieGenresMap
+describe('formatGenresToMap', () => {  
+  it('deve retornar um mapa com os gêneros corretamente mapeados', () => {
+    const genres = [{ id: 1, name: 'Ação' }, { id: 2, name: 'Comédia' }];
+    const result = formatGenresToMap(genres);
+    expect(result.get(1)).toBe('Ação');
+    expect(result.get(2)).toBe('Comédia');
+  });
+});
+
+describe('formatGenresToOptions', () => {
+  it('deve retornar uma lista de opções com os valores e rótulos corretos', () => {
+    const genres = [{ id: 1, name: 'Ação' }, { id: 2, name: 'Comédia' }];
+    const result = formatGenresToOptions(genres);
+    expect(result).toEqual([{ value: 1, label: 'Ação' }, { value: 2, label: 'Comédia' }]);
+  });
+});

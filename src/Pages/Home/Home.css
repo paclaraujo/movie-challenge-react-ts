@@ -25,3 +25,13 @@
         transform: rotate(360deg);
     }
   } 
+
+  .filters {
+    width: 85vw;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .filters div {
+    margin-left: 24px;
+  }

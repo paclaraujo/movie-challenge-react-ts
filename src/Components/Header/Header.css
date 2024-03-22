@@ -20,24 +20,8 @@
   color: #7024B9;
 }
 
-.header__itens {
-  list-style: none;
-  display: flex;
-  width: 12vw;
-  height: 100%;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header__itens li {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.header__itens li:hover {
-  border-bottom: 2px solid #7024B9;
-  color: #7024B9;
-  font-weight: bold;
-  cursor: pointer;
+@media (max-width: 768px){
+  .header {
+    justify-content: center;
+  }
 }
