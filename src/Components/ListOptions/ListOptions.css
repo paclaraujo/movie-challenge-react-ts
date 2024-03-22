@@ -1,0 +1,16 @@
+.select {
+  border-bottom: 2px solid #7024B9;
+  margin-bottom: 8px;
+}
+.list__container {
+  background-color: #060B1C;;
+  padding: 8px 4px;
+  color: #fff;
+  border: transparent;
+}
+
+@media (max-width: 768px){
+  .list__container {
+    width: calc(75vw + 24px);
+  }
+}
