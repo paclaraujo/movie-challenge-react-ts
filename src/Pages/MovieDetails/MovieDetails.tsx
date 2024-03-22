@@ -30,7 +30,8 @@ const MovieDetails = () => {
             <li className="movie_details__title">{movie.title}</li>
             <li className="movie_details__average">★ {movie.voteAverage.toFixed(1)}</li>
           </div>
-          <li className="movie_details__title">{movie.releaseDate.getFullYear()}</li>
+          {movie.releaseDate && <li className="movie_details__title">{movie.releaseDate.getFullYear()}</li>}
+          
           {movie.genres.map((genre, index  )=> <li key={genre+index} className="movie_details__genres">{genre}</li>)}
           <li className="movie_details__overview">{movie.overview}</li>
         </ul>
