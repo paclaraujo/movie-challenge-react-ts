@@ -35,3 +35,15 @@
   .filters div {
     margin-left: 24px;
   }
+
+
+
+  @media (max-width: 768px){
+    .filters {
+      flex-direction: column;
+    }
+  
+    .filters div {
+      margin-left: none;
+    }
+  }
