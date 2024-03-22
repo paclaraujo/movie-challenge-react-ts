@@ -76,6 +76,57 @@ describe("getMovies", () => {
     );
   });
 
+  it("should call endpoint with filter queries", async () => {
+    global.fetch = jest.fn().mockResolvedValue({});
+
+    await getMovies({filters: {page: 1, genreId: 1}});
+
+    expect(fetch).toHaveBeenCalledWith(
+      "https://api.themoviedb.org/3/discover/movie?page=1&with_genres=1",
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer token",
+          accept: "application/json",
+        },
+      }
+    );
+  });
+
+  it("should call endpoint with sort queries", async () => {
+    global.fetch = jest.fn().mockResolvedValue({});
+
+    await getMovies({filters: {page: 1, sortBy: "1"}});
+
+    expect(fetch).toHaveBeenCalledWith(
+      "https://api.themoviedb.org/3/discover/movie?page=1&sort_By=1",
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer token",
+          accept: "application/json",
+        },
+      }
+    );
+  });
+
+  it("should call endpoint with sort and filter queries", async () => {
+    global.fetch = jest.fn().mockResolvedValue({});
+
+    await getMovies({filters: {page: 1, sortBy: "1", genreId: 1}});
+
+    expect(fetch).toHaveBeenCalledWith(
+      "https://api.themoviedb.org/3/discover/movie?page=1&with_genres=1&sort_By=1",
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer token",
+          accept: "application/json",
+        },
+      }
+    );
+  });
+
   it('should return an error if fetch fails', async () => {
     global.fetch = jest.fn().mockRejectedValue('API is down');
 

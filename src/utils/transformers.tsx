@@ -3,10 +3,11 @@ import { Movie } from "../models/Movie"
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formatMovie = (movie: any, map: any) : Movie => {
   const genres = movie.genre_ids.map((id: number)=> map.get(id));
+  const image = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://github.com/paclaraujo/movie-challenge-react-ts/assets/39506102/6f631dbf-893c-4800-8ed0-f81b8394c262'
   
   return {
     id: movie.id,
-    image: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+    image,
     title: movie.title,
     releaseDate: new Date(movie.release_date),
     originalLanguage: movie.original_language,

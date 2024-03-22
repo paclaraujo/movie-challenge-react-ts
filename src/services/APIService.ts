@@ -5,6 +5,8 @@ import { getMovieGenres } from "./movieService";
 interface getMoviesParams {
   filters : {
     page: number;
+    genreId?: number | string | null;
+    sortBy?: string | string | null;
   }
 }
 
@@ -18,7 +20,7 @@ interface getMoviesReturn {
   movies: Movie[]
 }
 
-export const getMovies = async ({filters: { page }} : getMoviesParams) : Promise<getMoviesReturn | string> => {
+export const getMovies = async ({filters: { page, genreId, sortBy }} : getMoviesParams) : Promise<getMoviesReturn | string> => {
   const options = {
     method: 'GET',
     headers: {
@@ -27,8 +29,11 @@ export const getMovies = async ({filters: { page }} : getMoviesParams) : Promise
     }
   };
 
+  const queryParams = `?page=${page}${genreId ? `&with_genres=${genreId}`: ''}${sortBy ? `&sort_by=${sortBy}` : ''}`
+
   try {
-    const fetchResponse = await fetch(`https://api.themoviedb.org/3/discover/movie?page=${page}`, options);
+    const fetchResponse = await fetch(
+      `https://api.themoviedb.org/3/discover/movie${queryParams}`, options);
     const response = await fetchResponse.json();
 
     const moviesGenres = await getMovieGenres();
